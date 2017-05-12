@@ -7,13 +7,38 @@
             <meta name="robots" content="all,follow">
             <meta name="googlebot" content="index,follow,snippet,archive">
             
+            <!-- link the connector stylsheet -->
             <link rel="stylesheet" href="style.css">
             
-            <title>Login</title>
+            <!-- link google font -->
+            <link href="https://fonts.googleapis.com/css?family=Yrsa" rel="stylesheet">
+            
+            <title>Welcome | User authentication system</title>
 	</head>
 	<body>
-		<h1>Welcome</h1>
-		<h3>Please login below</h3>
-		<?php include_once'config/Database.php';?>
+            <section id="index-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                            <h1>User Authentication system.</h1>
+                            <br>
+                            <div id="loreg">
+                                <a class="btn btn-primary btn-lg" href="login.php">Login</a>
+                                <a class="btn btn-primary btn-lg" href="singup.php">Register</a>
+                            </div>
+                            <div id="usr">
+                                <p>
+                                    You're logged in as {username} <a href="logout.php">Logout</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-md-offset-4">
+                            <div class="alert alert-success" role="alert">
+                                <?php include_once'config/Database.php';?>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </section>
 	</body>
 </html>
