@@ -24,7 +24,7 @@
                             <br>
                             <div id="loreg">
                                 <a class="btn btn-primary btn-lg" href="login.php">Login</a>
-                                <a class="btn btn-primary btn-lg" href="singup.php">Register</a>
+                                <a class="btn btn-primary btn-lg" href="register.php">Register</a>
                             </div>
                             <div id="usr">
                                 <p>
