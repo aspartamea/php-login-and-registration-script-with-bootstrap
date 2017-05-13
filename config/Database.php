@@ -13,7 +13,7 @@
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
             //Display succesfull connection message
-            echo "Connection successful";
+            //echo "Connection successful";
 
 	}
 	catch (PDOException $ex) {
