@@ -1,3 +1,38 @@
+<?php 
+    
+    include_once'config/Database.php';
+
+    if(isset($_POST['email'])) {
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $sqlInsert = "INSERT INTO users (username, email, password, join_date)
+                    VALUES (:username, :email, :password, now())";
+
+        try {
+            $statement = $db->prepare($sqlInsert);
+            $statement->execute(array(':username' => $username, ':email' => $email, ':password' => $password));
+
+            if($statement->rowCount() == 1) {
+                $result = '
+                            <div class="alert alert-success" role="alert">
+                                Registration successful.<br>
+                            </div>
+                        ';
+            }
+        }
+        catch(PDOException $ex) {
+            $result = '
+                        <div class="alert alert-warning" role="alert">
+                            An error has occured: '.$ex->getMessage().'
+                        </div>
+                    ';
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head lang="en">
@@ -30,7 +65,14 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-md-offset-3 text-center">
-                        <form class="form-horizontal" id="lo-form" action="post" method="">
+
+                    <?php 
+                        if(isset($result)) {
+                            echo $result; 
+                        }
+                    ?>
+
+                        <form class="form-horizontal" id="lo-form" action="" method="POST">
                             <div class="form-group col-md-12">
                                 <div class="input-group">
                                     <span class="input-group-addon">
