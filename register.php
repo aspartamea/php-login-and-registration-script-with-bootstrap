@@ -1,5 +1,4 @@
 <?php 
-    //Add the db con
     include_once'config/Database.php';
     include_once'config/Utilities.php';
 
@@ -102,7 +101,7 @@
                     </div>
                     <div class="col-md-6 col-md-offset-3 text-center">
 
-                        <form class="form-horizontal" id="lo-form" action="" method="POST">
+                        <form class="form-horizontal" action="" method="POST">
                             <div class="form-group col-md-12">
                                 <div class="input-group">
                                     <span class="input-group-addon">
