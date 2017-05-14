@@ -1,3 +1,4 @@
+<?php include_once'config/Session.php'; ?>
 <!DOCTYPE html>
 <html>
 	<head lang="en">
@@ -22,15 +23,26 @@
                         <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
                             <h1>User Authentication system.</h1>
                             <br>
+                            <?php 
+                                if(!isset($_SESSION['username'])):
+                            ?>
                             <div id="loreg">
-                                <a class="btn btn-primary btn-lg" href="login.php">Login</a>
-                                <a class="btn btn-primary btn-lg" href="register.php">Register</a>
+                                <ul class="list-inline">
+                                    <li>
+                                        <a class="btn btn-primary btn-lg" href="login.php">Login</a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-primary btn-lg" href="register.php">Register</a>
+                                    </li>
+                                </ul>
                             </div>
+                            <?php else: ?>
                             <div id="usr">
                                 <p>
-                                    You're logged in as {username} <a href="logout.php">Logout</a>
+                                    You're logged in as <?php if(isset($_SESSION['username'])) echo $_SESSION['username']; ?> <a href="logout.php">Logout</a>
                                 </p>
                             </div>
+                        <?php endif; ?>
                         </div>
                         <div class="col-md-4 col-md-offset-4">
                             <div class="alert alert-success" role="alert">
