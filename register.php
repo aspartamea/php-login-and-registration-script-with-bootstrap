@@ -1,6 +1,7 @@
 <?php 
     //Add the db con
     include_once'config/Database.php';
+    include_once'config/Utilities.php';
 
     //process the form 
     if(isset($_POST['registerBtn'])){
@@ -10,12 +11,17 @@
         //form validation
         $required_fields = array('email', 'username', 'password');
 
-        //loop through the required fields 
-        foreach($required_fields as $name_of_field){
-            if(!isset($_POST[$name_of_field]) || $_POST[$name_of_field] == NULL){
-                $form_errors[] = $name_of_field . " is a required field";
-            }
-        }
+        //call the function to check empty field and merge the return data into array
+        $form_errors = array_merge($form_errors, check_empty_fields($required_fields));
+
+        //Fields that require checking for min length
+        $fields_to_check_length = array('username' => 4, 'password' => 6);
+
+        //Call the function to check min required length
+        $form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
+
+        //Email validation 
+        $form_errors = array_merge($form_errors, check_email($_POST));
 
         //check if error array is empty, if yes process and insert data
         if(empty($form_errors)){
@@ -40,7 +46,7 @@
                 //Check if one new row has been created 
                 if($statement->rowCount() == 1){
                     $result = '
-                        <div class="alert alert-success">
+                        <div class="alert alert-success" role="alert">
                             Registration successful!
                         </div>
                     ';
@@ -48,7 +54,7 @@
             }
             catch(PDOException $ex) {
                 $result = '
-                    <div class="alert alert-warning">
+                    <div class="alert alert-danger" role="alert">
                         An error occured: '.$ex->getMessage().'
                     </div>
                 ';
@@ -56,23 +62,10 @@
         }
         else {
             if(count($form_errors) == 1){
-                $result = '<div class="alert alert-warning">There was 1 error in the form<br>';
-
-                $result .= '<ul>';
-                //loop through array and display all items 
-                foreach($form_errors as $error){
-                    $result .= '<li> {$error} </li>';
-                }
-                $result .= '</ul></div>';
+                $result = '<div class="alert alert-danger">There was 1 error in the form<br>';
             }
             else {
-                $result = '<div class="alert alert-warning"> There were ' .count($form_errors). 'errors in the form<br>';
-                $result .= '<ul>';
-                //loop through array and display all items 
-                foreach($form_errors as $error){
-                    $result .= '<li> {$error} </li>';
-                }
-                $result .= '</ul></div>';
+                $result = '<div class="alert alert-danger"> There were ' .count($form_errors). ' errors in the form<br>';
             }
         }
     }
@@ -104,19 +97,10 @@
                         <h1>User Authentication system.</h1>
                         <br>
                             
-                        <div id="usr">
-                            <p>
-                                <a href="index.php">Back</a>
-                            </p>
-                        </div>
+                        <?php if(isset($result)) echo $result; ?>
+                        <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
                     </div>
                     <div class="col-md-6 col-md-offset-3 text-center">
-
-                    <?php 
-                        if(isset($result)) {
-                            echo $result; 
-                        }
-                    ?>
 
                         <form class="form-horizontal" id="lo-form" action="" method="POST">
                             <div class="form-group col-md-12">
@@ -124,7 +108,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-envelope"></i>
                                     </span>
-                                    <input class="form-control" type="text" placeholder="Your email address" name="email" required>
+                                    <input class="form-control" type="text" placeholder="Your email address" name="email">
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
@@ -132,7 +116,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                     </span>
-                                    <input class="form-control" type="text" placeholder="username" name="username" required>
+                                    <input class="form-control" type="text" placeholder="username" name="username" >
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
@@ -140,7 +124,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-key"></i>
                                     </span>
-                                    <input class="form-control" type="password" placeholder="password" name="password" required>
+                                    <input class="form-control" type="password" placeholder="password" name="password">
                                 </div>
                             </div>
                             <div class="form-group col-md-12 button text-center">
@@ -148,6 +132,13 @@
                                     
                             </div>
                         </form>
+                    </div>
+                    <div class="col-md-6 col-md-offset-3 text-center">
+                        <div id="usr">
+                            <p>
+                                <a href="index.php">Back</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
