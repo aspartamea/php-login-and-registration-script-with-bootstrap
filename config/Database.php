@@ -1,6 +1,5 @@
 <?php 
-	$dsn = 			'mysql:host=localhost'; //Do not change this 
-        $dbName =               'dbname=login_register_script'; //Change the name of the DB here 
+	$dsn =                 'mysql:host=localhost; dbname=login_register_script'; //Do not change this 
 	$username =             'matt'; //Change your database username here
 	$pwd = 			'password'; //Change your db password here
 	
