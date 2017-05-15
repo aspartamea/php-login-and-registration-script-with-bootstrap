@@ -94,6 +94,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
                         <h1>User Authentication system.</h1>
+                        <h3>Register</h3>
                         <br>
                             
                         <?php if(isset($result)) echo $result; ?>

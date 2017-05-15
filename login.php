@@ -77,6 +77,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
                         <h1>User Authentication system.</h1>
+                        <h3>Login</h3>
                         <br>
 
                         <?php if(isset($result)){
@@ -105,7 +106,8 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12 button text-center">
-                                <input name="loginBtn" type="submit" class="btn btn-primary btn-lg" value="Login">
+                                <input name="loginBtn" type="submit" class="btn btn-primary btn-lg" value="Login"><br />
+                                <a href="forgot_pwd.php">Forgotten password?</a>
                             </div>
                         </form>
                     </div>
