@@ -1,13 +1,16 @@
 <?php 
-	$dsn =                 'mysql:host=localhost; dbname=login_register_script'; //Do not change this 
-	$username =             'matt'; //Change your database username here
-	$pwd = 			'password'; //Change your db password here
+
+    define("DSN", "mysql:host=localhost;dbname=login_register_script");
+    define("USERNAME", "matt");
+    define("PWD", "password");
+
+
 	
 
 	try {
             
             //Create the connection 
-            $db = new PDO($dsn, $username, $pwd);
+            $db = new PDO(DSN, USERNAME, PWD);
             
             //set the PDO error mode to exception
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
