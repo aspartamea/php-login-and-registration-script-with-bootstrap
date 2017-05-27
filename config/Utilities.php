@@ -94,3 +94,21 @@ function flashMessage($message, $passOrFail = "Fail"){
 function redirectTo($page){
     header("Location: {$page}.php");
 }
+
+//Check for duplicate entries
+function checkDuplicateEntries($table, $column_name, $value, $db){
+    try {
+        $sqlQuery = "SELECT * FROM " .$table. " WHERE ".$column_name."=:$column_name";
+        $statement = $db->prepare($sqlQuery);
+        $statement->execute(array(":$column_name" => $value));
+
+        //check for return row
+        if($row = $statement->fetch()){
+            return true;
+        }
+        return false;
+    }
+    catch(PDOException $ex){
+        //Handle exception 
+    }
+}

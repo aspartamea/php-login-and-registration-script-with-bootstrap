@@ -22,13 +22,20 @@
         //Email validation 
         $form_errors = array_merge($form_errors, check_email($_POST));
 
-        //check if error array is empty, if yes process and insert data
-        if(empty($form_errors)){
-            //Collect form data and store in vars
-            $email = $_POST['email'];
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+        //Collect form data and store in vars
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
+        if(checkDuplicateEntries("users", "username", $username, $db)){
+            $result = flashMessage("Username is already taken! Please try another one");
+        }
+        else if(checkDuplicateEntries("users", "email", $email, $db)){
+            $result = flashMessage("email address is already being used! Please try another one");
+        }
+
+        //check if error array is empty, if yes process and insert data
+        else if(empty($form_errors)){
             //Hash the pwd
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             try{
