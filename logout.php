@@ -1,5 +1,6 @@
 <?php 
 	include_once'config/Session.php';
+	include_once'config/Utilities.php';
 
 	//Unset all of the session vars
 	$_SESSION = array(); 
@@ -16,6 +17,6 @@
 	//Finally destroy the session
 	session_destroy();
 
-	header('location: index.php');
+	redirectTo('index');
 
 ?>

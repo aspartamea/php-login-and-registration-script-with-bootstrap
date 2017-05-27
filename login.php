@@ -33,7 +33,7 @@
                     $_SESSION['id'] = $id;
                     $_SESSION['username'] = $username;
                     //Change below here to where you want users to be redirected upon login
-                    header("location: dashboard.php");
+                    redirectTo('index');
                 }
                 else{
                     $result = flashMessage("Invalid username or password!");

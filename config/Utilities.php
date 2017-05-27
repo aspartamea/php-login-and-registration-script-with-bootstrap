@@ -81,11 +81,16 @@ function show_errors($form_errors_array){
 //Create error & success message function (flashMessage)
 function flashMessage($message, $passOrFail = "Fail"){
     if($passOrFail === "Pass") {
-        $data = "<div class='alert alert-success' role='alert'>{$message}</div>"; 
+        $data = "<div class='alert alert-success' role='alert'>{$message}"; 
     }
     else {
-        $data = "<div class='alert alert-danger' role='alert'>{$message}</div>";
+        $data = "<div class='alert alert-danger' role='alert'>{$message}";
     }
 
     return $data;
+}
+
+//Create redirection function
+function redirectTo($page){
+    header("Location: {$page}.php");
 }
