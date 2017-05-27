@@ -44,27 +44,19 @@
 
                 //Check if one new row has been created 
                 if($statement->rowCount() == 1){
-                    $result = '
-                        <div class="alert alert-success" role="alert">
-                            Registration successful!
-                        </div>
-                    ';
+                    $result = flashMessage("Registration Successful", "Pass");
                 }
             }
             catch(PDOException $ex) {
-                $result = '
-                    <div class="alert alert-danger" role="alert">
-                        An error occured: '.$ex->getMessage().'
-                    </div>
-                ';
+                $result = flashMessage("An error has occurred " .$ex->getMessage());
             }
         }
         else {
             if(count($form_errors) == 1){
-                $result = '<div class="alert alert-danger">There was 1 error in the form<br>';
+                $result = flashMessage("There was 1 error in the form<br>");
             }
             else {
-                $result = '<div class="alert alert-danger"> There were ' .count($form_errors). ' errors in the form<br>';
+                $result = falshMessage("There were " .count($form_errors). " errors in the form<br>");
             }
         }
     }

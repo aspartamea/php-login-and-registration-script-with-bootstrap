@@ -76,3 +76,16 @@ function show_errors($form_errors_array){
     $errors .= "</ul>";
     return $errors;
 }
+
+
+//Create error & success message function (flashMessage)
+function flashMessage($message, $passOrFail = "Fail"){
+    if($passOrFail === "Pass") {
+        $data = "<div class='alert alert-success' role='alert'>{$message}</div>"; 
+    }
+    else {
+        $data = "<div class='alert alert-danger' role='alert'>{$message}</div>";
+    }
+
+    return $data;
+}

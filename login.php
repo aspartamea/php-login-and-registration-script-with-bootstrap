@@ -33,10 +33,10 @@
                     $_SESSION['id'] = $id;
                     $_SESSION['username'] = $username;
                     //Change below here to where you want users to be redirected upon login
-                    header("location: index.php");
+                    header("location: dashboard.php");
                 }
                 else{
-                    $result = '<div class="alert alert-danger" role="alert"> Invalid username or password!</div>';
+                    $result = flashMessage("Invalid username or password!");
                 }
             }
 
@@ -44,10 +44,10 @@
         }
         else {
             if(count($form_errors) == 1) {
-                $result = '<div class="alert alert-danger" role="alert">There was 1 error in the form<br>';
+                $result = flashMessage("There was 1 error in the form<br>");
             }
             else {
-                $result = '<div class="alert alert-danger" role="alert">There were ' .count($form_errors). ' errors in the form<br>'; 
+                $result = flashMessage('There were ' .count($form_errors). ' errors in the form<br>'); 
             }
         }
     }
