@@ -1,3 +1,6 @@
+<?php 
+	include_once'config/Session.php'; 
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -25,6 +28,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
+				<a class="navbar-brand" href="index.php">User Authentication</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -33,17 +37,41 @@
 							Home
 						</a>
 					</li>
-					<li>
-						<a href="register.php">
-							Register
-						</a>
-					</li>
-					<li>
-						<a href="login.php">
-							Login
-						</a>
-					</li>
-					
+					<?php 
+			            if(isset($_SESSION['username'])):
+			        ?>
+			    		<li>
+			    			<a href="">
+			    				My Profile
+			    			</a>
+			    		</li>
+			    		<li>
+			    			<a href="logout.php">
+			    				Logout
+			    			</a>
+			    		</li>
+			    	<?php else: ?>
+			    		<li>
+			    			<a href="">
+			    				About
+			    			</a>
+			    		</li>
+			    		<li>
+			    			<a href="">
+			    				Contact 
+			    			</a>
+			    		</li>
+			    		<li>
+			    			<a href="login.php">
+			    				Login
+			    			</a>
+			    		</li>
+			    		<li>
+			    			<a href="register.php">
+			    				Register
+			    			</a>
+			    		</li>
+			    	<?php endif; ?>					
 				</ul>
 			</div>
 		</div>
