@@ -54,24 +54,11 @@
     
 ?>
 
-<!DOCTYPE html>
-<html>
-	<head lang="en">
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta name="robots" content="all,follow">
-            <meta name="googlebot" content="index,follow,snippet,archive">
-            
-            <!-- link the connector stylsheet -->
-            <link rel="stylesheet" href="style.css">
-            
-            <!-- link google font -->
-            <link href="https://fonts.googleapis.com/css?family=Yrsa" rel="stylesheet">
-            
-            <title>Login | User authenication system</title>
-	</head>
-	<body>
+<?php
+    $page_title = 'Login';
+    include_once'includes/header.php'; 
+?>
+
         <section id="login-main">
             <div class="container">
                 <div class="row">
@@ -106,8 +93,8 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12 button text-center">
-                                <input name="loginBtn" type="submit" class="btn btn-primary btn-lg" value="Login"><br />
-                                <a href="forgot_pwd.php">Forgotten password?</a>
+                                <input name="loginBtn" type="submit" class="btn btn-primary btn-lg pull-right" value="Login"><br />
+                                <a href="forgot_pwd.php">Forgotten password?</a> <br /> <label><input name="remember" type="checkbox">Remember Me</label>
                             </div>
                         </form>
                     </div>
@@ -121,5 +108,4 @@
                 </div>
             </div>
         </section>
-	</body>
-</html>
+<?php include_once'includes/footer.php'; ?>
