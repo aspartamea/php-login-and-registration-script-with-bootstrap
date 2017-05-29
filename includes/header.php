@@ -41,7 +41,7 @@
 			            if(isset($_SESSION['username'])):
 			        ?>
 			    		<li>
-			    			<a href="">
+			    			<a href="#">
 			    				My Profile
 			    			</a>
 			    		</li>
@@ -52,12 +52,12 @@
 			    		</li>
 			    	<?php else: ?>
 			    		<li>
-			    			<a href="">
+			    			<a href="#">
 			    				About
 			    			</a>
 			    		</li>
 			    		<li>
-			    			<a href="">
+			    			<a href="#">
 			    				Contact 
 			    			</a>
 			    		</li>
