@@ -47,9 +47,6 @@
                                             }, 5000);
 
                                     </script>";                    
-
-                    //Change below here to where you want users to be redirected upon login
-                    //redirectTo('index');
                 }
                 else{
                     $result = flashMessage("Invalid username or password!");
