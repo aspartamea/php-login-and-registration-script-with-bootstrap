@@ -33,9 +33,23 @@
                     $_SESSION['username'] = $username;
 
                     //call sweetalert 
+                    echo $welcome = " 
+                                    <script type=\"text/javascript\">
+                                        swal({
+                                            title: \"Welcome back $username\",
+                                            text: \"Your being logged in\",
+                                            type: \"success\",
+                                            timer: 6000,
+                                            showConfirmButton: false});
+                                            
+                                            setTimeout(function(){
+                                                window.location.href='index.php';
+                                            }, 5000);
+
+                                    </script>";                    
 
                     //Change below here to where you want users to be redirected upon login
-                    redirectTo('index');
+                    //redirectTo('index');
                 }
                 else{
                     $result = flashMessage("Invalid username or password!");
