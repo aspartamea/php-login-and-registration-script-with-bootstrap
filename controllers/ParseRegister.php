@@ -51,7 +51,17 @@
 
                 //Check if one new row has been created 
                 if($statement->rowCount() == 1){
-                    $result = flashMessage("Registration Successful", "Pass");
+
+                    //call sweetalert 
+                    $result = " 
+                            <script type=\"text/javascript\">
+                                swal({
+                                    title: \"Congratulations $username\",
+                                    text: \"Registration has been successful\",
+                                    type: \"success\",
+                                    confirmButtonText: \"Thank you\"});
+                                    
+                            </script>";    
                 }
             }
             catch(PDOException $ex) {
