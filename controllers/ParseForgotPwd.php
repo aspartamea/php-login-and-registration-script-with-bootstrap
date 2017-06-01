@@ -1,81 +1,100 @@
 <?php
 	include_once'config/Database.php';
 	include_once'config/Utilities.php';
+    
+    //Process the form when btn is pressed
+    if(isset($_POST['pwdResetBtn'])) {
+        //initialise the form
+        $form_errors = array();
+        
+        //validate
+        $required_fields = array('email', 'new_password', 'confirm_password');
+        
+        //Check empty fields
+        $form_errors = array_merge($form_errors, check_empty_fields($required_fields));
+        
+        //Set required length to fields that require it 
+        $fields_to_check_length = array('new_password' => 6, 'confirm_password' => 6);
+        
+        //Merge data into an array 
+        $form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
+        
+        //Email validation
+        $form_errors = array_merge($form_errors, check_email($_POST));
+        
+        //Check if there are NO errors, if clear proceed
+        if(empty($form_errors)){
+            //Collect data from the form
+            $email = $_POST['email'];
+            $new_pwd = $_POST['new_password'];
+            $new_pwd_2 = $_POST['confirm_password'];
+            
+            //check if pwd's match
+            if($new_pwd != $new_pwd_2){
+                $result = flashMessage("Passwords do not match!");
+            }
+            else {
+                try{
+                    //create SQL select statement to verify if email address input exist in the database
+                    $sqlQuery = "SELECT email FROM users WHERE email =:email";
 
-	//Process the form when button is pressed
-	if(isset($_POST['pwdResetBtn'])) {
-		//initilise the array
-		$form_errors = array();
+                    //use PDO prepared to sanitize data
+                    $statement = $db->prepare($sqlQuery);
 
-		//form validation 
-		$required_fields = array('email', 'new_password', 'confirm_password');
+                    //execute the query
+                    $statement->execute(array(':email' => $email));
 
-		//check empty fields and merge the return data
-		$form_errors = array_merge($form_errors, check_empty_fields($required_fields));
+                    //check if record exist
+                    if($statement->rowCount() == 1){
+                        //hash the password
+                        $hashed_password = password_hash($new_pwd, PASSWORD_DEFAULT);
 
-		//Set required length for fields that require it
-		$fields_to_check_length = array('new_password' => 6, 'confirm_password' => 6);
+                        //SQL statement to update password
+                        $sqlUpdate = "UPDATE users SET password =:password WHERE email=:email";
 
-		//merge data into array
-		$form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
+                        //use PDO prepared to sanitize SQL statement
+                        $statement = $db->prepare($sqlUpdate);
 
-		//Email validation
-		$form_errors = array_merge($form_errors, check_email($_POST));
-
-		//check if error array is empty, if yes process
-		if(empty($form_errors)){
-			//collect the data from the form
-			$email = $_POST['email'];
-			$password1 = $_POST['new_password'];
-			$password2 = $_POST['confirm_password'];
-
-			//check if new passwords match
-			if($password1 != $password2){
-				$result = flashMessage("Passwords do not match!");
-			}
-			else {
-				try{
-					//create SQL statement and see if email exists in db
-					$sqlQuery = "SELECT email FROM users WHERE email = :email";
-
-					//sanitise it
-					$statement = $db->prepare($sqlQuery);
-
-					//make it run
-					$statement->execute(array(':email' => $email));
-
-					//Check if email add exits
-					if($statement->rowCount() == 1) {
-						//has the pwd
-						$hashed_password = password_hash($password1, PASSWORD_DEFAULT);
-
-						//Update the pwd
-						$sqlUpdate = "UPDATE users SET password = :password WHERE email = :email";
-
-						//Sanitise it 
-						$statement = $db->prepare($sqlUpdate);
-
-						//make it run
-						$statement->execute(array(':password' => $hashed_password, ':email' => $email));
-
-						$result = '<div class="alert alert-success" role="alert">Passwas has been reset</div>';
-					}
-					else {
-						$result = flashMessage("The email address provided does not exist, please try again");
-					}
-				}
-				catch (PDOException $ex){
-					$result = flashMessage("An error occurred: " .$ex->getMessage());
-				}
-			}
-		}
-		else {
-			if(count($form_errors) == 1) {
-				$result = falshMessage("There was 1 error in the form <br>");
-			}
-			else {
-				$result = flashMessage("There were " .count($form_errors). " errors in the form <br>");
-			}
-		}
-	}
+                        //execute the statement
+                        $statement->execute(array(':password' => $hashed_password, ':email' => $email));
+                        
+                        //call sweetalert 
+                    	$result = " 
+                            <script type=\"text/javascript\">
+                                swal({
+                                    title: \"Updated\",
+                                    text: \"Your password has been reset successfully\",
+                                    type: \"success\",
+                                    confirmButtonText: \"Thank you\"});
+                                    
+                            </script>";
+                        
+                    }
+                    else {
+                        //call sweetalert 
+                    	$result = " 
+                            <script type=\"text/javascript\">
+                                swal({
+                                    title: \"Error\",
+                                    text: \"The email address provided does not match our records, please try again\",
+                                    type: \"error\",
+                                    confirmButtonText: \"Ok\"});
+                                    
+                            </script>";
+                    }
+                }
+                catch (PDOException $ex) {
+                    $result = flashMessage("An error occurred: " .$ex->getMessage());    
+                }
+            }
+        }
+        else {
+            if(count($form_errors) == 1){
+                $result = flashMessage("There was 1 error in the form<br>");
+            }
+            else {
+                $result = flashMessage("There were " .count($form_errors). " errors in the form <br>");
+            }
+        }
+    }
 ?>

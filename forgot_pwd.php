@@ -1,7 +1,7 @@
 <?php 
 	$page_title = 'Forgotten password';
 	include_once'includes/header.php'; 
-	include_once'controllers/ParseForgotPwd';
+    include_once'controllers/ParseForgotPwd.php';
 ?>
         <section id="forgotPwd-main">
             <div class="container">
@@ -19,7 +19,7 @@
                         } ?>
                     </div>
                     <div class="col-md-6 col-md-offset-3 text-center">
-                        <form class="form-horizontal" action="" method="POST">
+                        <form class="form-horizontal" method="POST">
                         	<div class="form-group col-md-12">
                         		<div class="input-group">
                         			<span class="input-group-addon">
