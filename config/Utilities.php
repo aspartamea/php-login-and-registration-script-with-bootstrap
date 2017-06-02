@@ -112,3 +112,58 @@ function checkDuplicateEntries($table, $column_name, $value, $db){
         //Handle exception 
     }
 }
+
+//Remember me function
+function rememberMe($user_id){
+    $encryptCookieData = base64_encode('UaQteh5i4y3dntstemYODEC{$user_id}');
+    //Set cookie to expire in roughly 30 days
+    setcookie("rememberUserCookie", $encryptCookieData, time()+60*60*24*100, "/");
+}
+
+//Check if cookie used is the same as the encrypted one
+function isCookieValid($db){
+    $isValid = false;
+
+    if(isset($_COOKIE['rememberUserCookie'])){
+        //Decode cookies and extract user ID
+
+        $decryptCookieData = base64_decode($_COOKIE['rememberUserCookie']);
+        $user_id = explode('UaQteh5i4y3dntstemYODEC', $decryptCookieData);
+        $userID = $user_id[1];
+
+        //Check if ID retrieved from the cookie exists in the DB
+        $sqlQuery = "SELECT * FROM users WHERE id = :id";
+        $statement = $db->prepare($sqlQuery);
+        $statement->execute(array(':id'=> $userID));
+
+        if($row = $statement->fetch()){
+            $id = $row['id'];
+            $username = $row['username'];
+
+            //Create user session
+            $_SESSION['id'] = $id;
+            $_SESSION['username'] = $username;
+            $isValid = true;
+        }
+        else {
+           //Cookie ID is invalid destroy session and log out the user
+           $isValid = false;
+           $this->signout(); 
+        }
+    }
+    return false;
+}
+
+//Singout function
+function signout(){
+    unset($_SESSION['username']);
+    unset($_SESSION['id']);
+
+    if(isset($_COOKIE['rememberUserCookie'])){
+        unset($_COOKIE['rememberUserCookie']);
+        setcookie('rememberUserCookie', null, -1, '/');
+    }
+    session_destroy();
+    session_regenerate_id(true);
+    redirectTo('index');
+}

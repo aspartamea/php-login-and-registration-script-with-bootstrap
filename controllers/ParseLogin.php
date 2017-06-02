@@ -15,6 +15,8 @@
             //Collect the form data
             $user = $_POST['username'];
             $password = $_POST['password'];
+            isset($_POST['remember']) ? $remember = $_POST['remember'] : $remember = "";
+
 
             //check if user exists in the db 
             $sqlQuery = "SELECT * FROM users WHERE username = :username";
@@ -31,6 +33,10 @@
                 if(password_verify($password, $hashed_password)){
                     $_SESSION['id'] = $id;
                     $_SESSION['username'] = $username;
+
+                    if($remember == "yes") {
+                        rememberMe($id);
+                    }
 
                     //call sweetalert 
                     echo $welcome = " 

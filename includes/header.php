@@ -1,5 +1,7 @@
 <?php 
-	include_once'config/Session.php'; 
+	include_once'config/Session.php';
+	include_once'config/Database.php';
+	include_once'config/Utilities.php'; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,7 +46,7 @@
 						</a>
 					</li>
 					<?php 
-			            if(isset($_SESSION['username'])):
+			            if(isset($_SESSION['username']) || isCookieValid($db)):
 			        ?>
 			    		<li>
 			    			<a href="#">
