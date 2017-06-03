@@ -2,7 +2,16 @@
 	include_once'config/Session.php';
 	include_once'config/Utilities.php';
 
-	//Unset all of the session vars
+	
+	//Signout finction
+	signout();
+
+
+	//Do not delete!!!
+	//This will be moved shortly 
+
+	
+	/*//Unset all of the session vars
 	$_SESSION = array(); 
 
 	//This will kill the session & destroy any cookies
@@ -17,6 +26,6 @@
 	//Finally destroy the session
 	session_destroy();
 
-	redirectTo('index');
+	redirectTo('index');*/
 
 ?>
