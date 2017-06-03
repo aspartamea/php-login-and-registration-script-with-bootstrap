@@ -19,7 +19,7 @@
                             echo show_errors($form_errors);
                         } ?>
                     </div>
-                    <div class="col-md-4 col-md-offset-4 text-center">
+                    <div class="col-md-6 col-md-offset-3 text-center">
                         <form class="form-horizontal" action="" method="POST">
                             <div class="form-group col-md-12">
                                 <div class="input-group">

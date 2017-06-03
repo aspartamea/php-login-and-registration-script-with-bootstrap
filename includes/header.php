@@ -39,7 +39,7 @@
 				<a class="navbar-brand" href="index.php">User Authentication</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav"><i class="hide"><?php echo guard(); ?></i>
 					<li>
 						<a href="index.php">
 							Home
