@@ -49,7 +49,7 @@
 			            if(isset($_SESSION['username']) || isCookieValid($db)):
 			        ?>
 			    		<li>
-			    			<a href="#">
+			    			<a href="profile.php?user_identity=<?php if(isset($encode_id)) echo $encode_id; ?>">
 			    				My Profile
 			    			</a>
 			    		</li>

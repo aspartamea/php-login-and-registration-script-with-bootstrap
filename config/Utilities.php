@@ -1,4 +1,10 @@
 <?php
+
+//Set the site name 
+
+$site_name = "MWN-Soft";
+
+
 /**
  * @param $required_fields_array, n array containing the list of all required fields
  * @return array, containing all errors
@@ -115,7 +121,7 @@ function checkDuplicateEntries($table, $column_name, $value, $db){
 
 //Remember me function
 function rememberMe($user_id){
-    $encryptCookieData = base64_encode('UaQteh5i4y3dntstemYODEC{$user_id}');
+    $encryptCookieData = base64_encode('Qauteh9q5y4smqtstemLOQDT{$user_id}');
     //Set cookie to expire in roughly 30 days
     setcookie("rememberUserCookie", $encryptCookieData, time()+60*60*24*100, "/");
 }
@@ -128,7 +134,7 @@ function isCookieValid($db){
         //Decode cookies and extract user ID
 
         $decryptCookieData = base64_decode($_COOKIE['rememberUserCookie']);
-        $user_id = explode('UaQteh5i4y3dntstemYODEC', $decryptCookieData);
+        $user_id = explode('Qauteh9q5y4smqtstemLOQDT', $decryptCookieData);
         $userID = $user_id[1];
 
         //Check if ID retrieved from the cookie exists in the DB
