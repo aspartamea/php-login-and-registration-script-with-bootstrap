@@ -2,7 +2,10 @@
 
 Welcome 
 
-This project is a side project which i will be working on slowly.  At present i am currently looking at transfering all of the files to a new repo as the project is now starting to progress past just being a user authentication system.  
+This project will no longer be updated (as of 11/06/17).  I have now created a new project that better matches the scope of how this project was progressing.  The new project can be found by visiting this link: https://github.com/MattN1014/Chat-It
+
+
+
 
 This system could be used for a number of different applications and easily integrated into any projects you may be thinking of creating.  
 
@@ -11,6 +14,7 @@ I have used PHP PDO, JS, HTML, CSS to create this system.  The basic functions a
 	Login a user 
 	Reset a users password 
 	Show a basic profile of the logged in user.   
+	Enabled basic profile editing (username & email address).
 
  
 I have included the SQL DB i currently have for this project.  There is one user currently registered, however you can easily create a new user to register.  When i have finished creating the system as far as the scope of this project goes.  I will upload a new SQL DB with no registered users. 
@@ -18,7 +22,6 @@ I have included the SQL DB i currently have for this project.  There is one user
 If you want to integrate this system into any of your projects please feel free to do so.  If you want to make any changes to the project files then please feel free to do so.  
  
 
-***** This project will soon stop being updated.  This is due to the scope of the project changing from a user authentication system.  
 
 
   
