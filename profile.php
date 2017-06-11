@@ -6,7 +6,7 @@
 
 <div class="container">
 	<div>
-		<h1><?php if(isset($username)) echo $username;?>'s Profile</h1>
+		<h1>Profile</h1>
 		<?php if(!isset($_SESSION['username'])) : ?>
 
 			<p class="lead">
@@ -25,3 +25,6 @@
 		<?php endif; ?>
 	</div>
 </div>
+
+
+<?php include_once'includes/footer.php'; ?>
