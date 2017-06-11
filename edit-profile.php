@@ -6,7 +6,7 @@
 ?>
 
 <div class="container">
-	<div class="col-lg-7">
+	<div class="col-lg-6 col-lg-offset-3 text-center">
 		<h2>Edit Profile</h2><hr>
 		<div>
 			<?php if(isset($result)) echo $result; ?>
@@ -21,25 +21,25 @@
 			</p>
 		<?php else: ?>
 			<form class="form-horizontal" method="POST" action="">
-				<div class="form-group col-md-5">
+				<div class="form-group col-md-12">
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-envelope"></i>
 						</span>
-						<input class="form-control" type="text" value="<?php if(isset($email)) echo $email; ?>" name="email">
+						<input class="form-control" type="text" name="email" value="<?php if(isset($email)) echo $email; ?>">
 					</div>
 				</div>
-				<div class="form-group col-md-5">
+				<div class="form-group col-md-12">
 					<div class="input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-user"></i>
 						</span>
-						<input class="form-control" type="text" value="<?php if(isset($username)) echo $username; ?>" name="username">
+						<input class="form-control" type="text" name="username" value="<?php if(isset($username)) echo $username; ?>">
 					</div>
 				</div>
-				<div class="form-group col-md-5 text-center">
+				<div class="form-group col-md-12 text-center">
 					<input type="hidden" name="hidden_id" value="<?php if(isset($id)) echo $id; ?>">
-					<button type="button" name="updateProfileBtn" class="btn btn-primary pull-right">Update Profile</button> 
+					<input name="updateProfileBtn" type="submit" class="btn btn-primary pull-right" value="Update profile">
 				</div>
 			</form>
 	</div>

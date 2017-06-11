@@ -52,13 +52,13 @@
 		if(empty($form_errors)){
 			try{
 				//create sql update
-				$sqlUpdate = "UPDATE users SET username = :username, email = :email WHERE id = :id";
+				$sqlUpdate = "UPDATE users SET username =:username, email =:email WHERE id =:id";
 
 				//Sanitise 
 				$statement = $db->prepare($sqlUpdate);
 
 				//update 
-				$statement->execute(array(':username' => $username, ':email' => email, ':id' => $hidden_id));
+				$statement->execute(array(':username' => $username, ':email' => $email, ':id' => $hidden_id));
 
 				//Check if one new row was created
 				if($statement->rowCount() == 1){
@@ -71,7 +71,7 @@
 				else {
 					$result = '
 						<script type="text/javascript">
-							swal("Nothing Happened", "Your didnt make any changes");
+							swal("Nothing Happened", "You didnt make any changes");
 						</script>
 					';
 				}
