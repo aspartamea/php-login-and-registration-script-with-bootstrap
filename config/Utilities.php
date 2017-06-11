@@ -177,7 +177,7 @@ function signout(){
 //Guard function, used for auto signout when inactive
 function guard(){
     $isValid = true;
-    $inactive = 60 * 2; //2mins
+    $inactive = 60 * 10; //10mins
     $fingerprint = md5($_SERVER['REMOTE_ADDR']. $_SERVER['HTTP_USER_AGENT']);
 
     if((isset($_SESSION['fingerprint']) && $_SESSION['fingerprint'] != $fingerprint)) {
